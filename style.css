@@ -7,7 +7,6 @@
 }
 
 .square {
-    width: calc(100% / 16);
     aspect-ratio: 1;
     /* height: 30px; */
     border: 1px solid black;
