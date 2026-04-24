@@ -17,6 +17,27 @@ function updateMode(color) {
     currentMode = color;
 }
 
+function createGrid(size) {
+    
+    container.innerHTML = "";
+
+     for (let j = 0; j < size * size; j++) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        container.appendChild(square);
+
+        square.style.width = (100/size) + "%";
+
+        square.addEventListener('mouseenter', function() {
+            if (currentMode === "black") {
+                this.style.backgroundColor = "black";
+            } else if (currentMode === "color") {
+                this.style.backgroundColor = getRandomColor();
+            }
+        })
+    }
+}
+
 
 // Generate a random colour
 function getRandomColor() {
@@ -29,66 +50,48 @@ function getRandomColor() {
 
 
 // Create the grid of squares
-for (let i = 0; i < 256; i++) {
-        const square = document.createElement('div');
-        square.classList.add('square');
-        container.appendChild(square);
-        square.style.width = (100 / 16) + "%"
+createGrid(16);
 
-        // // Change the background colour of a square when mouse enters
-        // square.addEventListener('mouseenter', function() {
-        //     this.classList.add('hovered');
-        // });
+// const squareAmount = document.getElementById('square-amount')
+// squareAmount.addEventListener('click', function() {
+//     let size;
 
-        square.addEventListener('mouseenter', function() {
-            if (currentMode === "black") {
-                this.style.backgroundColor = "black";
-            } else if (currentMode === "color") {
-                this.style.backgroundColor = getRandomColor();
-            }
-        })
-}
+//     do {
+//         const input = prompt('How many squares?');
+//         if (input === null) {
+//             return;
+//         }
 
-const squareAmount = document.getElementById('square-amount')
-squareAmount.addEventListener('click', function() {
-    let size;
+//         size = Number(input);
 
-    do {
-        const input = prompt('How many squares?');
-        if (input === null) {
-            return;
-        }
+//         if(isNaN(size)) {
+//             alert('please enter a number')
+//         } else if (size > 100 || size <= 0) {
+//             alert('please enter a number between 1 - 100')
+//         }
+//      } while (isNaN(size) || size > 100 || size <= 0);
 
-        size = Number(input);
-
-        if(isNaN(size)) {
-            alert('please enter a number')
-        } else if (size > 100 || size <= 0) {
-            alert('please enter a number between 1 - 100')
-        }
-     } while (isNaN(size) || size > 100 || size <= 0);
-
-    container.innerHTML = "";
+//     container.innerHTML = "";
 
 
-     for (let j = 0; j < size * size; j++) {
-        const square = document.createElement('div');
-        square.classList.add('square');
-        container.appendChild(square);
+//      for (let j = 0; j < size * size; j++) {
+//         const square = document.createElement('div');
+//         square.classList.add('square');
+//         container.appendChild(square);
 
-        square.style.width = (100/size) + "%";
+//         square.style.width = (100/size) + "%";
 
 
-        square.addEventListener('mouseenter', function() {
-            if (currentMode === "black") {
-                this.style.backgroundColor = "black";
-            } else if (currentMode === "color") {
-                this.style.backgroundColor = getRandomColor();
-            }
-        })
+//         square.addEventListener('mouseenter', function() {
+//             if (currentMode === "black") {
+//                 this.style.backgroundColor = "black";
+//             } else if (currentMode === "color") {
+//                 this.style.backgroundColor = getRandomColor();
+//             }
+//         })
 
-}
-})
+// }
+// })
 
 const clearButton = document.getElementById('clear');
 clearButton.addEventListener('click', clearGrid);
@@ -100,3 +103,9 @@ function clearGrid() {
     square[k].style.backgroundColor = "";
   }
 }
+
+const gridSize = document.getElementById("grid-size-range");
+
+gridSize.addEventListener('input', function() {
+    createGrid(gridSize.value);
+})

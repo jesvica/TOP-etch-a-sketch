@@ -8,11 +8,6 @@
 
 .square {
     aspect-ratio: 1;
-    /* height: 30px; */
     border: 1px solid black;
     box-sizing: border-box;
-}
-
-.hovered {
-    background-color: black;
 }
