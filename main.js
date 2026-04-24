@@ -1,5 +1,14 @@
 const container = document.querySelector('#container');
 
+function getRandomColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r}, ${g}, ${b})`
+}
+
+
 // Create the grid of squares
 for (let i = 0; i < 256; i++) {
         const square = document.createElement('div');
@@ -7,11 +16,14 @@ for (let i = 0; i < 256; i++) {
         container.appendChild(square);
         square.style.width = (100 / 16) + "%"
 
-        // Change the background colour of a square when mouse enters
-        square.addEventListener('mouseenter', function() {
-            this.classList.add('hovered');
-        });
+        // // Change the background colour of a square when mouse enters
+        // square.addEventListener('mouseenter', function() {
+        //     this.classList.add('hovered');
+        // });
 
+        square.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = getRandomColor();
+        })
 }
 
 const squareAmount = document.getElementById('square-amount')
@@ -44,9 +56,13 @@ squareAmount.addEventListener('click', function() {
           square.style.width = (100/size) + "%";
 
         // Change the background colour of a square when mouse enters
+        // square.addEventListener('mouseenter', function() {
+        //     this.classList.add('hovered');
+        // });
+
         square.addEventListener('mouseenter', function() {
-            this.classList.add('hovered');
-        });
+            this.style.backgroundColor = getRandomColor();
+        })
 
 }
 })
