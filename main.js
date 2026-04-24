@@ -1,5 +1,24 @@
 const container = document.querySelector('#container');
 
+let currentMode = "black";
+
+const blackButton = document.getElementById('black');
+const colorButton = document.getElementById('color');
+
+blackButton.addEventListener('click', function() {
+    updateMode("black");
+});
+
+colorButton.addEventListener('click', function() {
+    updateMode("color");
+});
+
+function updateMode(color) {
+    currentMode = color;
+}
+
+
+// Generate a random colour
 function getRandomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
@@ -22,7 +41,11 @@ for (let i = 0; i < 256; i++) {
         // });
 
         square.addEventListener('mouseenter', function() {
-            this.style.backgroundColor = getRandomColor();
+            if (currentMode === "black") {
+                this.style.backgroundColor = "black";
+            } else if (currentMode === "color") {
+                this.style.backgroundColor = getRandomColor();
+            }
         })
 }
 
@@ -45,7 +68,7 @@ squareAmount.addEventListener('click', function() {
         }
      } while (isNaN(size) || size > 100 || size <= 0);
 
-     container.innerHTML = "";
+    container.innerHTML = "";
 
 
      for (let j = 0; j < size * size; j++) {
@@ -53,17 +76,27 @@ squareAmount.addEventListener('click', function() {
         square.classList.add('square');
         container.appendChild(square);
 
-          square.style.width = (100/size) + "%";
+        square.style.width = (100/size) + "%";
 
-        // Change the background colour of a square when mouse enters
-        // square.addEventListener('mouseenter', function() {
-        //     this.classList.add('hovered');
-        // });
 
         square.addEventListener('mouseenter', function() {
-            this.style.backgroundColor = getRandomColor();
+            if (currentMode === "black") {
+                this.style.backgroundColor = "black";
+            } else if (currentMode === "color") {
+                this.style.backgroundColor = getRandomColor();
+            }
         })
 
 }
 })
 
+const clearButton = document.getElementById('clear');
+clearButton.addEventListener('click', clearGrid);
+
+function clearGrid() {
+   let square = container.querySelectorAll('.square');
+
+  for (let k = 0; k < square.length; k++) {
+    square[k].style.backgroundColor = "";
+  }
+}
