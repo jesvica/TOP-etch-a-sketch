@@ -1,4 +1,4 @@
-const container = document.querySelector('#container');
+const container = document.querySelector('#grid-container');
 
 let currentMode = "black";
 
